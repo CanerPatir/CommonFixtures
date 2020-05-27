@@ -1,5 +1,3 @@
-
-
 namespace CommonFixtures.Tests.BaseTest
 {
     using System.Threading;

@@ -1,7 +1,39 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFrameworks>netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
+        <Version>0.0.1</Version>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <Authors>Caner Patir</Authors>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/canerpatir/CommonFixtures</RepositoryUrl>
+        <PackageLicenseUrl>https://github.com/canerpatir/CommonFixtures/blob/master/LICENCE</PackageLicenseUrl>
+        <PackageProjectUrl>https://github.com/canerpatir/CommonFixtures</PackageProjectUrl>
+        <PackageTags>netcore test, aspnetcore test, entity framework test, test fixtures</PackageTags>
+        <LangVersion>latest</LangVersion>
     </PropertyGroup>
+
+    <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.0.3" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.0.3" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.0.3" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.0.3" />
+    </ItemGroup>
+    <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.4" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.4" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.4" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.4" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.4" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="AutoFixture" Version="4.11.0" />
+        <PackageReference Include="FakeItEasy" Version="6.0.1" />
+    </ItemGroup>
 
 </Project>

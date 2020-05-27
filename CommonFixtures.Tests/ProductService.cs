@@ -14,9 +14,13 @@ namespace CommonFixtures.Tests
         
         public Task<int> CreateProduct(string title, decimal price)
         {
-            var product = new Product();
-
-            return Task.FromResult(1);
+            var product = new Product
+            {
+                Price =  price,
+                Title = title
+            };
+            
+            return _repository.CreateProduct(product, CancellationToken.None);
         }
 
         public async Task UpdateProductPrice(int id, decimal givenPrice)
