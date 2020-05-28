@@ -13,7 +13,7 @@ namespace CommonFixtures
     {
     }
 
-    public abstract class WithEfCore<TDbContext, TDbContextImplementation> : WithIoC
+    public abstract class  WithEfCore<TDbContext, TDbContextImplementation> : WithIoC
         where TDbContext : DbContext
         where TDbContextImplementation : class, TDbContext
     {
@@ -22,9 +22,10 @@ namespace CommonFixtures
 
         /// <summary>
         /// Pulls the database to the desired state. You can call from test class constructor or top of your test method.
+        /// Saves changes automatically 
         /// </summary>
         /// <param name="arrangeAction"></param>
-        protected void ArrangeTestDb(Action<TDbContext> arrangeAction)
+        protected void Arrange(Action<TDbContext> arrangeAction)
         {
             arrangeAction?.Invoke(DbContext);
             DbContext.SaveChanges();
@@ -55,9 +56,15 @@ namespace CommonFixtures
 
         protected DbConnection DbConnection { get; private set; }
 
+        /// <summary>
+        /// Queries from test db context with given predicate expression
+        /// </summary>
         protected IReadOnlyCollection<T> Query<T>(Expression<Func<T, bool>> predicate) where T : class
             => DbContext.Set<T>().Where(predicate).ToList();
 
+        /// <summary>
+        /// Gets given type of entity from test db context with id
+        /// </summary>
         protected T Get<T>(object id) where T : class
             => DbContext.Set<T>().Find(id);
 

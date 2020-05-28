@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,29 +15,36 @@ namespace CommonFixtures
     {
         private readonly Action<IServiceCollection> _configureServices;
 
+        private readonly Lazy<HttpClient> _httpClient;
+        public HttpClient HttpClient => _httpClient.Value;
+
         internal TestWebAppFactory(Action<IServiceCollection> configureServices)
         {
             _configureServices = configureServices ?? throw new ArgumentNullException(nameof(configureServices));
+            _httpClient = new Lazy<HttpClient>(CreateClient);
         }
 
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
-            builder.ConfigureServices(_configureServices);
-            builder.Configure(app =>
+            builder.ConfigureServices(services =>
             {
-                // invoking migrate method of startup
-                InvokeMigrateMethodOfStartup(app);
+                _configureServices(services);
+
+                var transientSp = services.BuildServiceProvider();
+
+                using var scope = transientSp.CreateScope();
+                InvokeMigrateMethodOfStartup(scope.ServiceProvider);
             });
         }
         
-        private static void InvokeMigrateMethodOfStartup(IApplicationBuilder app)
+        private static void InvokeMigrateMethodOfStartup(IServiceProvider serviceProvider)
         {
             var methodInfo = typeof(TStartup).GetMethod("Migrate", BindingFlags.Static | BindingFlags.NonPublic);
             if (methodInfo == null) return;
 
             var result = methodInfo.Invoke(null, new object[]
             {
-                app.ApplicationServices, CancellationToken.None
+                serviceProvider, CancellationToken.None
             });
 
             if (result is Task taskResult)

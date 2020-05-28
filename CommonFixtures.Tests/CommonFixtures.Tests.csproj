@@ -1,19 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFrameworks>netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\CommonFixtures\CommonFixtures.csproj"/>
+        <ProjectReference Include="..\CommonFixtures.SampleWebApp\CommonFixtures.SampleWebApp.csproj" />
+        <ProjectReference Include="..\CommonFixtures\CommonFixtures.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="xunit" Version="2.4.1"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1"/>
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1"/>
-        <PackageReference Include="coverlet.collector" Version="1.2.1"/>
+        <PackageReference Include="coverlet.msbuild" Version="2.8.1" />
+        <PackageReference Include="xunit" Version="2.4.1" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
+        <PackageReference Include="coverlet.collector" Version="1.2.1" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+      <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.4" />
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.0.3" />
     </ItemGroup>
 
 </Project>

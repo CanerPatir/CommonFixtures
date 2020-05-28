@@ -1,4 +1,5 @@
 using System;
+using System.Net.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace CommonFixtures
@@ -15,6 +16,7 @@ namespace CommonFixtures
         where TDbContextImplementation : class, TDbContext
     {
         protected TestWebAppFactory<TStartup> WebAppFactory { get; }
+        protected HttpClient HttpClient => WebAppFactory.HttpClient;
 
         protected WithWebAppAndEfCore()
         {

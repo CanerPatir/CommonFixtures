@@ -1,3 +1,6 @@
+using CommonFixtures.SampleWebApp.Model;
+using CommonFixtures.SampleWebApp.Services;
+
 namespace CommonFixtures.Tests.BaseTest
 {
     using System.Threading;

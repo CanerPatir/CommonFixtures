@@ -67,39 +67,5 @@ namespace CommonFixtures
         public virtual void Dispose()
         {
         }
-
-        /// <summary>
-        /// Helper to compare two collection element by element
-        /// </summary>
-        /// <returns>True if both collection has same elements and count</returns>
-        protected static bool ScrambledEquals<T>(IEnumerable<T> list1, IEnumerable<T> list2)
-        {
-            var cnt = new Dictionary<T, int>();
-            foreach (var s in list1)
-            {
-                if (cnt.ContainsKey(s))
-                {
-                    cnt[s]++;
-                }
-                else
-                {
-                    cnt.Add(s, 1);
-                }
-            }
-
-            foreach (var s in list2)
-            {
-                if (cnt.ContainsKey(s))
-                {
-                    cnt[s]--;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-
-            return cnt.Values.All(c => c == 0);
-        }
     }
 }

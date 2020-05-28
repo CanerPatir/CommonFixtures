@@ -1,7 +1,8 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using CommonFixtures.SampleWebApp.Model;
 
-namespace CommonFixtures.Tests
+namespace CommonFixtures.SampleWebApp.Services
 {
     public class ProductService
     {

@@ -44,7 +44,13 @@ namespace CommonFixtures
             var dbContextOptions = testDbContextOptionsBuilder.Options;
             var dbConnection = RelationalOptionsExtension.Extract(dbContextOptions).Connection;
 
-            services.AddScoped<TDbContext, TDbContextImplementation>(sp => (TDbContextImplementation) Activator.CreateInstance(typeof(TDbContextImplementation), dbContextOptions));
+            services.AddScoped<TDbContext, TDbContextImplementation>(sp =>
+            {
+                var dbContext=  Activator.CreateInstance(typeof(TDbContextImplementation), dbContextOptions) as TDbContextImplementation;
+                dbContext.Database.EnsureCreated();
+
+                return dbContext;
+            });
             // should register as scoped to isolate dbContexts across arrange, act, assert phases through using NewServiceScope() test method.
             // This approach is more reliable to create new instance of dbContext before each phase of tests
             // If you wish use shared dbContext you can uncomment below

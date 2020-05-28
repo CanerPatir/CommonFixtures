@@ -1,13 +1,15 @@
 using System;
+using System.Net.Http;
 
 namespace CommonFixtures
 {
-    public abstract class WithAppServer<TStartup> : WithIoC
+    public abstract class WithWebApp<TStartup> : WithIoC
         where TStartup : class
     {
         protected TestWebAppFactory<TStartup> WebAppFactory { get; }
+        protected HttpClient HttpClient => WebAppFactory.HttpClient;
 
-        protected WithAppServer()
+        protected WithWebApp()
         {
             WebAppFactory = new TestWebAppFactory<TStartup>(ConfigureServices);
         }

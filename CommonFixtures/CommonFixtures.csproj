@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFrameworks>netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Authors>Caner Patir</Authors>
         <RepositoryType>git</RepositoryType>

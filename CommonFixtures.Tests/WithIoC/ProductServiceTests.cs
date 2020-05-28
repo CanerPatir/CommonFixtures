@@ -1,5 +1,7 @@
 using System.Threading;
 using System.Threading.Tasks;
+using CommonFixtures.SampleWebApp.Model;
+using CommonFixtures.SampleWebApp.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 

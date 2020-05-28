@@ -8,16 +8,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    
+
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1.4.0
-    
+
     - name: Build
       run:  dotnet build -c Release
-    
+      
     - name: Test
-      run:  dotnet test
+      run:  dotnet test /p:CollectCoverage=true /p:CoverletOutput=../CoverageResults /p:CoverletOutputFormat=Cobertura
 
+    - name: Codecov install
+      run: dotnet tool install --global Codecov.Tool
+      
+    - name: Push to codecov
+      run: codecov -f ./CoverageResults/coverage.netcoreapp3.1.cobertura.xml -t ${{ secrets.CODECOV_TOKEN }}
+      
   deploy:
     needs: [build]
     runs-on: ubuntu-latest

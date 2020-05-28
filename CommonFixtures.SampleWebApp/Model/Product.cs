@@ -1,4 +1,4 @@
-namespace CommonFixtures.Tests
+namespace CommonFixtures.SampleWebApp.Model
 {
     public class Product
     {
