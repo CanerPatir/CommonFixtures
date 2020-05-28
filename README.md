@@ -2,7 +2,7 @@ CommonFixtures
 ========
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/CanerPatir/Commonfixtures/main.yml)
-[![codecov](https://codecov.io/gh/CanerPatir/CommonFixtures/branch/master/graph/badge.svg)](https://codecov.io/gh/CanerPatir/CommonFixtures)
+[![codecov](https://codecov.io/gh/CanerPatir/CommonFixtures/branch/master/graph/badge.svg)](https://img.shields.io/codecov/c/github/CanerPatir/CommonFixtures?token=OSKYBSA9KW)
 ![Nuget](https://img.shields.io/nuget/v/CommonFixtures?color=blue)
 
 Common fixture is a toolkit contains essential test fixtures for .net core and asp.net core test projects. CommonFixtures aims 
