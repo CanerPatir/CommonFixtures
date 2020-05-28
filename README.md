@@ -9,11 +9,11 @@ Ready to use fixtures
 CommonFixtures supplies some base classes to supply underlying fixtures for your test suit. These are as below;
     
     * BaseTest
-    * TestWithIoC
-    * TestWithHost
-    * TestWithAppServer
-    * TestWithEfCore
-    * TestWithWebAppAndEfCore
+    * WithIoC
+    * WithHost
+    * WithAppServer
+    * WithEfCore
+    * WithWebAppAndEfCore
 
 ## BaseTest 
 
@@ -68,12 +68,12 @@ CommonFixtures supplies some base classes to supply underlying fixtures for your
         }
 ```
 
-## TestWithIoC 
+## WithIoC 
 
 * ServiceCollection fixture to keep your IoC logic afloat throughout the test. 
 
 ```csharp
-    public class ProductServiceTest : TestWithIoC
+    public class ProductServiceTest : WithIoC
     {
         protected override void ConfigureServices(IServiceCollection services)
         {
@@ -101,7 +101,7 @@ CommonFixtures supplies some base classes to supply underlying fixtures for your
 
 * Also allows you to mock some dependencies of the system under test while leaving others as they are
 ```csharp
-  public class DependencyMockingTest : TestWithIoC
+  public class DependencyMockingTest : WithIoC
   {
         public class YourAwesomeService
         {
@@ -125,12 +125,12 @@ CommonFixtures supplies some base classes to supply underlying fixtures for your
    }
 ```
 
-## TestWithHost
+## WithHost
 
 * Supplies test host for testing .net core hosted services (see: [.NET Core Hosted Services](https://docs.microsoft.com/tr-tr/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-3.1&tabs=visual-studio))
 
 ```csharp
-    public class QueuedJobHostedServiceTests : TestWithHost
+    public class QueuedJobHostedServiceTests : WithHost
     {
         protected override void ConfigureServices(IServiceCollection services)
         {
@@ -158,21 +158,21 @@ CommonFixtures supplies some base classes to supply underlying fixtures for your
     }
 ```
 
-## TestWithAppServer 
+## WithAppServer 
 
 * Aspnet core test server fixture for integration testing scenarios
 
 ```csharp
 ```
 
-## TestWithEfCore 
+## WithEfCore 
 
 * Supplies test fixture to test projects which use Entity Framework Core as persistence layer.
 
 ```csharp
 ```
 
-## TestWithWebAppAndEfCore 
+## WithWebAppAndEfCore 
 
 * Entity framework test fixture 
 
