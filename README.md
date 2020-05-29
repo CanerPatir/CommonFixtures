@@ -7,7 +7,13 @@ CommonFixtures
 
 Common fixture is a toolkit contains essential test fixtures for .net core and asp.net core test projects. CommonFixtures aims 
 to reduce your preparing test suite effort for common testing concerns and supplying ready to use testing infrastructure.
-CommonFixtures can be used independently from testing framework. You can prefer any kind of dotNet testing framework like xUnit, nUnit etc. .
+CommonFixtures can be used independently from testing framework. You can prefer any kind of dotNet testing framework like xUnit, nUnit etc.
+
+|Supported .Net Core Versions|
+|--------------|
+|.netocreapp3.1|
+|.netocreapp3.0|
+
 
 Ready to use fixtures
 ========
@@ -258,13 +264,5 @@ public class CreateProductCommandHandlerTest : WithWebAppAndEfCore<Startup, Appl
     }
 }
 ```
-
-### Supported .Net Core Versions
-
-|              |
-|--------------|
-|.netocreapp3.1|
-|.netocreapp3.0|
-
 
 
