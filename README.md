@@ -1,7 +1,7 @@
 CommonFixtures
 ========
 
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/CanerPatir/CommonFixtures/Nuget Package Deploy)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/CanerPatir/CommonFixtures/Nuget%20Package%20Deploy)
 [![codecov](https://codecov.io/gh/CanerPatir/CommonFixtures/branch/master/graph/badge.svg?token=OSKYBSA9KW)](https://img.shields.io/codecov/c/github/CanerPatir/CommonFixtures?token=OSKYBSA9KW)
 ![Nuget](https://img.shields.io/nuget/v/CommonFixtures?color=blue)
 
