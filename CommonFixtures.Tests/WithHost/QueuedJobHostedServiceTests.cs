@@ -30,7 +30,7 @@ namespace CommonFixtures.Tests.WithHost
             });
             
             // Assert
-            await Task.Delay(300);
+            await Task.Delay(400);
             Assert.Equal(1, counter);
         }
     }
