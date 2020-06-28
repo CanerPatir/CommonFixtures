@@ -1,0 +1,29 @@
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+
+</head>
+<body>
+
+<span id="counter">0</span>
+
+<button id="btn">Increment</button>
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        let counterSpan = document.getElementById("counter");
+        let counter = Number(counterSpan.innerText);
+        document.getElementById("btn").addEventListener("click", function() {
+          counter += 1;
+          counterSpan.innerText = counter;
+        });
+    });
+</script>
+</body>
+</html>

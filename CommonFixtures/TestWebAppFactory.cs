@@ -3,27 +3,33 @@ using System.Net.Http;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CommonFixtures
 {
-    public class TestWebAppFactory<TStartup> : WebApplicationFactory<TStartup> 
-        where TStartup : class
+    /// <summary>
+    /// port awareness test server
+    /// </summary>
+    public class TestWebAppFactory<TStartup> : WebApplicationFactory<TStartup>, IWebAppFactory<TStartup> where TStartup : class
     {
         private readonly Action<IServiceCollection> _configureServices;
 
         private readonly Lazy<HttpClient> _httpClient;
         public HttpClient HttpClient => _httpClient.Value;
 
+
+        private readonly Lazy<Uri> _rootUri;
+        public Uri RootUri => _rootUri.Value;
+
         internal TestWebAppFactory(Action<IServiceCollection> configureServices)
         {
             _configureServices = configureServices ?? throw new ArgumentNullException(nameof(configureServices));
             _httpClient = new Lazy<HttpClient>(CreateClient);
+            _rootUri = new Lazy<Uri>(() => Server.BaseAddress); //Last is https://localhost:5001!
         }
-
+        
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
             builder.ConfigureServices(services =>

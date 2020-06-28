@@ -25,6 +25,7 @@ CommonFixtures supplies some base classes to supply underlying fixtures for your
 * [WithWebApp](#withwebapp)
 * [WithEfCore](#withefcore)
 * [WithWebAppAndEfCore](#withwebappandefcore)
+* Selenium support for WithWebApp and WithWebAppAndEfCore fixtures
 
 ## BaseTest 
 
@@ -264,5 +265,40 @@ public class CreateProductCommandHandlerTest : WithWebAppAndEfCore<Startup, Appl
     }
 }
 ```
+## UI Testing With Selenium
+* Make sure that following two dependencies are added to your test project.
 
+```xml
+  <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+  <PackageReference Include="Selenium.Chrome.WebDriver" Version="83.0.0" />
+``` 
+
+```csharp
+// see SampleWebApp Index.cshtml to see sut 
+public class MvcViewIntegrationTest : WithWebApp<Startup>
+{
+    protected override bool SeleniumEnabled => true;
+    protected override bool SeleniumHeadless => true; // you can make false to see chrome browser
+
+    [Fact]
+    public void Counter_Test()
+    {
+        // Arrange
+        WebDriverWait waitForElement = new WebDriverWait(Selenium, TimeSpan.FromSeconds(10));
+        waitForElement.Until(ElementIsVisible(By.Id("counter")));
+        
+        var button = Selenium.FindElement(By.Id("btn"));
+        var counterSpan = Selenium.FindElement(By.Id("counter"));
+        
+        // Act
+        Assert.Equal(0, int.Parse(counterSpan.Text));
+        button.Click();
+    
+        // Assert
+        counterSpan = Selenium.FindElement(By.Id("counter"));
+        Assert.Equal(1, int.Parse(counterSpan.Text));
+    }
+}
+
+```
 

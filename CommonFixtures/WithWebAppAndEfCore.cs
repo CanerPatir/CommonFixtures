@@ -1,6 +1,8 @@
 using System;
 using System.Net.Http;
+using System.Threading;
 using Microsoft.EntityFrameworkCore;
+using OpenQA.Selenium.Chrome;
 
 namespace CommonFixtures
 {
@@ -15,17 +17,31 @@ namespace CommonFixtures
         where TDbContext : DbContext
         where TDbContextImplementation : class, TDbContext
     {
-        protected TestWebAppFactory<TStartup> WebAppFactory { get; }
+        protected IWebAppFactory<TStartup> WebAppFactory { get; }
         protected HttpClient HttpClient => WebAppFactory.HttpClient;
+        protected ChromeDriver Selenium => (WebAppFactory as SeleniumTestWebAppFactory<TStartup>)?.Selenium;
+        protected virtual bool SeleniumEnabled => false;
+        protected virtual bool SeleniumHeadless => true;
 
         protected WithWebAppAndEfCore()
         {
-            WebAppFactory = new TestWebAppFactory<TStartup>(services =>
+            if (SeleniumEnabled)
+            {
+                WebAppFactory = new SeleniumTestWebAppFactory<TStartup>(services =>
                 {
                     ConfigureServices(services);
                     ReplaceDbContext(services);
-                }
-            );
+                }, SeleniumHeadless);
+            }
+            else
+            {
+                WebAppFactory = new TestWebAppFactory<TStartup>(services =>
+                    {
+                        ConfigureServices(services);
+                        ReplaceDbContext(services);
+                    }
+                );
+            }
         }
 
         protected override IServiceProvider ServiceProviderFactory() => WebAppFactory.Services;

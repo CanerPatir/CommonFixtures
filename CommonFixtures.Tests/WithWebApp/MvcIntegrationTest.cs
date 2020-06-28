@@ -7,11 +7,6 @@ namespace CommonFixtures.Tests.WithWebApp
 {
     public class MvcIntegrationTest : WithWebApp<Startup>
     {
-        protected override void ConfigureServices(IServiceCollection services)
-        {
-            // You can override or mock services that registered from Startup.cs before
-        }
-
         [Fact]
         public async Task Get_EndpointsReturnSuccessAndCorrectContentType()
         {
@@ -22,8 +17,8 @@ namespace CommonFixtures.Tests.WithWebApp
             var response = await client.GetAsync("/weatherforecast");
 
             // Assert
-            response.EnsureSuccessStatusCode(); 
-            Assert.Equal("application/json; charset=utf-8", 
+            response.EnsureSuccessStatusCode();
+            Assert.Equal("application/json; charset=utf-8",
                 response.Content.Headers.ContentType.ToString());
         }
     }
