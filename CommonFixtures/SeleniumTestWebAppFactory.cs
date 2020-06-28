@@ -34,11 +34,11 @@ namespace CommonFixtures
         public ChromeDriver Selenium { get; }
         public Uri RootUri { get; private set; }
 
-        internal SeleniumTestWebAppFactory(Action<IServiceCollection> configureServices, bool seleniumHeadless)
+        internal SeleniumTestWebAppFactory(Action<IServiceCollection> configureServices, bool seleniumHeadless, bool randomPort)
         {
             _seleniumCancellation = new CancellationTokenSource();
             _configureServices = configureServices;
-            _port = GetRandomUnusedPort();
+            _port = GetRandomUnusedPort(randomPort);
             _localhostBaseAddress = "https://localhost:" + _port;
 
             ClientOptions.BaseAddress = new Uri(_localhostBaseAddress);
@@ -50,8 +50,12 @@ namespace CommonFixtures
             Selenium = new Selenium(RootUri, seleniumHeadless).CreateBrowser(_seleniumCancellation.Token);
         }
 
-        public static int GetRandomUnusedPort()
+        public static int GetRandomUnusedPort(bool randomPort)
         {
+            if (!randomPort)
+            {
+                return 5001;
+            }
             var listener = new TcpListener(IPAddress.Any, 0);
             listener.Start();
             var port = ((IPEndPoint) listener.LocalEndpoint).Port;

@@ -13,12 +13,13 @@ namespace CommonFixtures
         protected ChromeDriver Selenium => (WebAppFactory as SeleniumTestWebAppFactory<TStartup>)?.Selenium;
         protected virtual bool SeleniumEnabled => false;
         protected virtual bool SeleniumHeadless => true;
+        protected virtual bool SeleniumRandomPort => false;
 
         protected WithWebApp()
         {
             if (SeleniumEnabled)
             {
-                WebAppFactory = new SeleniumTestWebAppFactory<TStartup>(ConfigureServices, SeleniumHeadless);
+                WebAppFactory = new SeleniumTestWebAppFactory<TStartup>(ConfigureServices, SeleniumHeadless, SeleniumRandomPort);
             }
             else
             {

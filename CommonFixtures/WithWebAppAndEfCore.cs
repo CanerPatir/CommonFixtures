@@ -22,6 +22,7 @@ namespace CommonFixtures
         protected ChromeDriver Selenium => (WebAppFactory as SeleniumTestWebAppFactory<TStartup>)?.Selenium;
         protected virtual bool SeleniumEnabled => false;
         protected virtual bool SeleniumHeadless => true;
+        protected virtual bool SeleniumRandomPort => false;
 
         protected WithWebAppAndEfCore()
         {
@@ -31,7 +32,7 @@ namespace CommonFixtures
                 {
                     ConfigureServices(services);
                     ReplaceDbContext(services);
-                }, SeleniumHeadless);
+                }, SeleniumHeadless, SeleniumRandomPort);
             }
             else
             {
