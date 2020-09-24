@@ -10,7 +10,7 @@ namespace CommonFixtures.Tests.WithWebApp
     public class MvcViewIntegrationTest : WithWebApp<Startup>
     {
         protected override bool SeleniumEnabled => true;
-        protected override bool SeleniumHeadless => true;
+        protected override bool SeleniumHeadless => false;
 
         [Fact(Skip = "Skipping to keep github actions pipeline consist")]
         public void Counter_Test()
