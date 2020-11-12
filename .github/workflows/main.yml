@@ -8,20 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
-    - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1.4.0
-      with:
-        dotnet-version: '5.0.100' 
-        
-    - name: Setup .NET Core SDK 2
+      
+    - name: Setup .NET Core SDK 1
       uses: actions/setup-dotnet@v1.4.0
       with:
         dotnet-version: '3.1.404'
         
+    - name: Setup .NET Core SDK 2
+      uses: actions/setup-dotnet@v1.4.0
+      with:
+        dotnet-version: '5.0.100' 
+        
     - name: .net SxS
       run: |
-        rsync -a ${DOTNET_ROOT/5.0.100/3.1.404}/* $DOTNET_ROOT/
+        rsync -a ${DOTNET_ROOT/3.1.404/5.0.100}/* $DOTNET_ROOT/
 
     - name: Build
       run:  dotnet build -c Release
