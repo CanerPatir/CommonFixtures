@@ -11,6 +11,8 @@ jobs:
 
     - name: Setup .NET Core SDK
       uses: actions/setup-dotnet@v1.4.0
+      with:
+        dotnet-version: '5.0.100'
 
     - name: Build
       run:  dotnet build -c Release
@@ -23,6 +25,9 @@ jobs:
       
     - name: Push to codecov
       run: codecov -f CoverageResults/coverage.netcoreapp3.1.cobertura.xml -t ${{ secrets.CODECOV_TOKEN }}
+      
+    - name: Push to codecov net5
+      run: codecov -f CoverageResults/coverage.net5.0.cobertura.xml -t ${{ secrets.CODECOV_TOKEN }} 
       
   deploy:
     needs: [build]
