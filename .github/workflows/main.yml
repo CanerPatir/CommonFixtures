@@ -18,6 +18,10 @@ jobs:
       uses: actions/setup-dotnet@v1.4.0
       with:
         dotnet-version: '3.1.404'
+        
+    - name: .net SxS
+      run: |
+        rsync -a ${DOTNET_ROOT/5.0.100/3.1.404}/* $DOTNET_ROOT/
 
     - name: Build
       run:  dotnet build -c Release
