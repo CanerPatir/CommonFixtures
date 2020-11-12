@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>netcoreapp3.0;netcoreapp3.1</TargetFrameworks>
-        <Version>0.0.6</Version>
+        <TargetFrameworks>net5.0;netcoreapp3.1</TargetFrameworks>
+        <Version>0.0.7</Version>
         <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
         <Authors>Caner Patir</Authors>
         <RepositoryType>git</RepositoryType>
@@ -13,22 +13,28 @@
         <LangVersion>latest</LangVersion>
     </PropertyGroup>
 
-    <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.0'">
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.0.3" />
-    </ItemGroup>
     <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp3.1'">
         <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.7" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.10" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.10" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.10" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.10" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.10" />
+    </ItemGroup>
+    <ItemGroup Condition=" '$(TargetFramework)' == 'net5.0'">
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="5.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="AutoFixture" Version="4.14.0" />
         <PackageReference Include="coverlet.msbuild" Version="2.9.0" />
         <PackageReference Include="FakeItEasy" Version="6.2.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="3.1.8" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.8" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.8" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.8" />
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.8" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.8" />
         <PackageReference Include="Selenium.Chrome.WebDriver" Version="85.0.0" />
         <PackageReference Include="Selenium.Support" Version="3.141.0" />
         <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />

@@ -25,11 +25,11 @@ namespace CommonFixtures.SampleWebApp
             services.AddControllersWithViews();
             services.AddMediatR(GetType().Assembly);
 
-            services.AddDbContext<ApplicationDbContext>(opts =>
-            {
-                opts.UseMySql("<my sql conn str>");
-            });
-
+#if NET5_0
+            services.AddDbContext<ApplicationDbContext>(opts => { opts.UseMySql("<my sql conn str>", ServerVersion.AutoDetect("<my sql conn str>")); });
+#elif NETCOREAPP3_1
+            services.AddDbContext<ApplicationDbContext>(opts => { opts.UseMySql("<my sql conn str>"); });
+#endif
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<ProductService>();
         }
