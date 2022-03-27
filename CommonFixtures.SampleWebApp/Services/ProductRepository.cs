@@ -12,7 +12,7 @@ namespace CommonFixtures.SampleWebApp.Services
         {
             _dbContext = dbContext;
         }
-        
+
         public async Task<int> CreateProduct(Product product, CancellationToken cancellationToken)
         {
             await _dbContext.AddAsync(product, cancellationToken);
@@ -26,7 +26,7 @@ namespace CommonFixtures.SampleWebApp.Services
         }
 
         public async Task SaveProduct(Product product, CancellationToken cancellationToken)
-        { 
+        {
             _dbContext.Update(product);
             await _dbContext.SaveChangesAsync(cancellationToken);
         }

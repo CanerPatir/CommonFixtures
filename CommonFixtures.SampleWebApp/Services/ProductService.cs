@@ -12,21 +12,21 @@ namespace CommonFixtures.SampleWebApp.Services
         {
             _repository = repository;
         }
-        
+
         public Task<int> CreateProduct(string title, decimal price)
         {
             var product = new Product
             {
-                Price =  price,
+                Price = price,
                 Title = title
             };
-            
+
             return _repository.CreateProduct(product, CancellationToken.None);
         }
 
         public async Task UpdateProductPrice(int id, decimal givenPrice)
         {
-            var product=  await _repository.GetProduct(id, CancellationToken.None);
+            var product = await _repository.GetProduct(id, CancellationToken.None);
 
             product.Price = givenPrice;
 

@@ -59,22 +59,20 @@ namespace CommonFixtures
                         .Timeouts().ImplicitWait = TimeSpan.FromSeconds(1);
 
                     driver.Navigate().GoToUrl(SutUri);
-
+                    
                     // Run in background.
-                    var logs = new RemoteLogs(driver);
-                    _ = Task.Run(async () =>
+                     _ = Task.Run(async () =>
                     {
                         while (!cancellationToken.IsCancellationRequested)
                         {
                             await Task.Delay(TimeSpan.FromSeconds(3), cancellationToken);
-
-                            var consoleLogs = logs.GetLog(LogType.Browser);
-                            foreach (var entry in consoleLogs)
+                            var consoleLogs =  driver.Manage().Logs.GetLog(LogType.Browser);
+                             foreach (var entry in consoleLogs)
                             {
                                 _output?.WriteLine($"[Browser Log]: {entry.Timestamp}: {entry.Message}");
                             }
                         }
-                    });
+                    }, cancellationToken);
 
                     return driver;
                 }
